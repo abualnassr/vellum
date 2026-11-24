@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="none">
+  <defs>
+    <linearGradient id="bgGrad" x1="28" y1="16" x2="228" y2="240" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#20273B"/>
+      <stop offset="100%" stop-color="#111521"/>
+    </linearGradient>
+    <linearGradient id="pageGrad" x1="56" y1="40" x2="198" y2="216" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FCF9F2"/>
+      <stop offset="100%" stop-color="#EDE5D5"/>
+    </linearGradient>
+    <linearGradient id="nibGrad" x1="94" y1="84" x2="162" y2="188" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#4C6EF5"/>
+      <stop offset="100%" stop-color="#2B4AC7"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Rounded Squircle Background -->
+  <rect x="12" y="12" width="232" height="232" rx="54" fill="url(#bgGrad)"/>
+  <rect x="13" y="13" width="230" height="230" rx="53" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
+
+  <!-- Subtle Sheet Shadow -->
+  <path d="M62 46C62 40.477 66.477 36 72 36H158L200 78V206C200 211.523 195.523 216 190 216H72C66.477 216 62 211.523 62 206V46Z" fill="rgba(0,0,0,0.34)" transform="translate(0,4)"/>
+
+  <!-- Warm Ivory Vellum Sheet -->
+  <path d="M58 44C58 38.477 62.477 34 68 34H154L198 78V204C198 209.523 193.523 214 188 214H68C62.477 214 58 209.523 58 204V44Z" fill="url(#pageGrad)"/>
+
+  <!-- Dog-ear Corner Fold -->
+  <path d="M154 34L198 78H164C158.477 78 154 73.523 154 68V34Z" fill="#D9CEBA"/>
+  <path d="M154 34L198 78H164C158.477 78 154 73.523 154 68V34Z" fill="rgba(255,255,255,0.35)"/>
+
+  <!-- Refined Cobalt Bookmark Accent -->
+  <path d="M84 34H104V68L94 61L84 68V34Z" fill="#C9593B"/>
+
+  <!-- Editorial V-Nib Emblem -->
+  <path d="M84 96H104L128 156L152 96H172L136.5 184H119.5L84 96Z" fill="url(#nibGrad)"/>
+  <circle cx="128" cy="126" r="6" fill="#FAF6EE"/>
+  <path d="M128 132V162" stroke="#FAF6EE" stroke-width="3" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,657 @@
+/* Editorial Markdown Typography & Rich Blocks */
+.vellum-prose-shell {
+  width: 100%;
+  max-width: var(--reading-measure);
+  margin: 0 auto;
+  padding: 40px 36px 96px;
+  font-size: calc(var(--reading-size) * var(--zoom));
+  line-height: 1.74;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.vellum-prose-shell.font-serif {
+  font-family: var(--font-serif);
+  font-size: calc((var(--reading-size) + 1px) * var(--zoom));
+  line-height: 1.78;
+}
+
+.vellum-prose-shell.dir-rtl {
+  direction: rtl;
+}
+
+.vellum-prose-shell.dir-ltr {
+  direction: ltr;
+}
+
+/* Frontmatter Metadata Card */
+.vellum-frontmatter {
+  margin-bottom: 28px;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  background: var(--bg-chrome);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+}
+
+.vellum-fm-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.vellum-fm-key {
+  color: var(--text-muted);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 0.69rem;
+}
+
+.vellum-fm-val {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.vellum-fm-tags {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.vellum-fm-tag {
+  background: var(--accent-soft);
+  color: var(--accent-text);
+  padding: 1px 8px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 500;
+}
+
+/* Headings */
+.vellum-prose h1,
+.vellum-prose h2,
+.vellum-prose h3,
+.vellum-prose h4,
+.vellum-prose h5,
+.vellum-prose h6 {
+  color: var(--text-primary);
+  font-weight: 650;
+  line-height: 1.26;
+  letter-spacing: -0.02em;
+  margin-top: 1.85em;
+  margin-bottom: 0.6em;
+  scroll-margin-top: 24px;
+  position: relative;
+}
+
+.vellum-prose > h1:first-child,
+.vellum-prose > h2:first-child,
+.vellum-prose > h3:first-child {
+  margin-top: 0;
+}
+
+.vellum-prose h1 {
+  font-size: 2.05em;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  padding-bottom: 0.35em;
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: 0.75em;
+}
+
+.vellum-prose h2 {
+  font-size: 1.48em;
+  padding-bottom: 0.28em;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.vellum-prose h3 {
+  font-size: 1.2em;
+}
+
+.vellum-prose h4 {
+  font-size: 1.04em;
+}
+
+.vellum-prose h5,
+.vellum-prose h6 {
+  font-size: 0.92em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.vellum-prose .heading-anchor {
+  position: absolute;
+  inset-inline-start: -1.15em;
+  opacity: 0;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 400;
+  transition: opacity var(--transition-fast), color var(--transition-fast);
+}
+
+.vellum-prose h1:hover .heading-anchor,
+.vellum-prose h2:hover .heading-anchor,
+.vellum-prose h3:hover .heading-anchor,
+.vellum-prose h4:hover .heading-anchor {
+  opacity: 0.75;
+}
+
+.vellum-prose .heading-anchor:hover {
+  opacity: 1;
+  color: var(--accent);
+}
+
+/* Paragraphs & Inline Semantics */
+.vellum-prose p {
+  margin: 0 0 1.05em;
+}
+
+.vellum-prose a {
+  color: var(--accent-text);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1.5px;
+  transition: text-decoration-color var(--transition-fast), color var(--transition-fast);
+}
+
+.vellum-prose a:hover {
+  color: var(--accent-hover);
+  text-decoration-color: var(--accent);
+}
+
+.vellum-prose strong {
+  font-weight: 650;
+  color: var(--text-primary);
+}
+
+.vellum-prose hr {
+  border: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--border-strong) 18%,
+    var(--border-strong) 82%,
+    transparent
+  );
+  margin: 2.2em 0;
+}
+
+.vellum-prose mark {
+  background: var(--warning-soft);
+  color: inherit;
+  padding: 0.06em 0.28em;
+  border-radius: 3px;
+}
+
+.vellum-prose kbd {
+  font-family: var(--font-mono);
+  font-size: 0.8em;
+  padding: 0.14em 0.44em;
+  border-radius: var(--radius-xs);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-strong);
+  box-shadow: 0 1px 0 var(--border-strong);
+  color: var(--text-primary);
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* Inline Code */
+.vellum-prose :not(pre) > code {
+  font-family: var(--font-mono);
+  font-size: 0.855em;
+  background: var(--bg-subtle);
+  color: var(--text-primary);
+  padding: 0.14em 0.42em;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--border-subtle);
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+.vellum-prose .katex {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* Code Cards */
+.vellum-code-block {
+  margin: 1.35em 0;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-code);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  direction: ltr;
+  text-align: left;
+}
+
+.vellum-code-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 12px;
+  background: var(--bg-code-header);
+  border-bottom: 1px solid var(--border-subtle);
+  font-family: var(--font-sans);
+  user-select: none;
+}
+
+.vellum-code-lang {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.vellum-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-elevated);
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.vellum-copy-btn:hover {
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+}
+
+.vellum-copy-btn.copied {
+  color: var(--success);
+  border-color: color-mix(in srgb, var(--success) 40%, transparent);
+  background: var(--success-soft);
+}
+
+.vellum-code-block pre {
+  margin: 0;
+  padding: 14px 16px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 0.86em;
+  line-height: 1.62;
+  tab-size: 2;
+}
+
+.vellum-code-block pre code {
+  font-family: inherit;
+  background: transparent;
+  padding: 0;
+  border: 0;
+}
+
+/* Blockquotes */
+.vellum-prose blockquote {
+  margin: 1.25em 0;
+  padding-block: 0.3em;
+  padding-inline: 1.15em 0;
+  border-inline-start: 3px solid var(--accent);
+  color: var(--text-secondary);
+}
+
+.vellum-prose blockquote > :last-child {
+  margin-bottom: 0;
+}
+
+/* GitHub Alerts / Callouts */
+.vellum-alert {
+  margin: 1.3em 0;
+  padding: 13px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  border-inline-start-width: 3.5px;
+  font-family: var(--font-sans);
+}
+
+.vellum-alert-title {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.82rem;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  margin-bottom: 6px;
+}
+
+.vellum-alert-title svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+.vellum-alert-body > :first-child {
+  margin-top: 0;
+}
+
+.vellum-alert-body > :last-child {
+  margin-bottom: 0;
+}
+
+.vellum-alert-note {
+  background: var(--alert-note-bg);
+  border-inline-start-color: var(--alert-note);
+}
+.vellum-alert-note .vellum-alert-title {
+  color: var(--alert-note);
+}
+
+.vellum-alert-tip {
+  background: var(--alert-tip-bg);
+  border-inline-start-color: var(--alert-tip);
+}
+.vellum-alert-tip .vellum-alert-title {
+  color: var(--alert-tip);
+}
+
+.vellum-alert-important {
+  background: var(--alert-important-bg);
+  border-inline-start-color: var(--alert-important);
+}
+.vellum-alert-important .vellum-alert-title {
+  color: var(--alert-important);
+}
+
+.vellum-alert-warning {
+  background: var(--alert-warning-bg);
+  border-inline-start-color: var(--alert-warning);
+}
+.vellum-alert-warning .vellum-alert-title {
+  color: var(--alert-warning);
+}
+
+.vellum-alert-caution {
+  background: var(--alert-caution-bg);
+  border-inline-start-color: var(--alert-caution);
+}
+.vellum-alert-caution .vellum-alert-title {
+  color: var(--alert-caution);
+}
+
+/* Lists & Interactive Task Lists */
+.vellum-prose ul,
+.vellum-prose ol {
+  margin: 0.6em 0 1.15em;
+  padding-inline-start: 1.55em;
+  padding-inline-end: 0;
+}
+
+.vellum-prose li {
+  margin: 0.34em 0;
+}
+
+.vellum-prose li > p {
+  margin-bottom: 0.45em;
+}
+
+.vellum-prose ul.contains-task-list {
+  list-style: none;
+  padding-inline-start: 0.25em;
+}
+
+.vellum-prose li.task-list-item {
+  position: relative;
+  padding-inline-start: 25px;
+}
+
+.vellum-prose input.task-list-item-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0.34em;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  border-radius: 4px;
+  border: 1.5px solid var(--border-strong);
+  background: var(--bg-elevated);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.vellum-prose input.task-list-item-checkbox:hover {
+  border-color: var(--accent);
+}
+
+.vellum-prose input.task-list-item-checkbox:checked {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.vellum-prose input.task-list-item-checkbox:checked::after {
+  content: '';
+  position: absolute;
+  left: 4.5px;
+  top: 1.5px;
+  width: 4px;
+  height: 8px;
+  border: solid #ffffff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Tables */
+.vellum-table-wrap {
+  margin: 1.35em 0;
+  overflow-x: auto;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--bg-elevated);
+}
+
+.vellum-prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92em;
+  font-variant-numeric: tabular-nums;
+}
+
+.vellum-prose th,
+.vellum-prose td {
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--border-subtle);
+  text-align: start;
+}
+
+.vellum-prose thead th {
+  background: var(--bg-chrome);
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 0.88em;
+  border-bottom: 1px solid var(--border-strong);
+}
+
+.vellum-prose tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.vellum-prose tbody tr:hover td {
+  background: var(--bg-hover);
+}
+
+/* Images */
+.vellum-prose img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  margin: 1em 0;
+  cursor: zoom-in;
+  box-shadow: var(--shadow-sm);
+}
+
+/* KaTeX Math */
+.vellum-math-block {
+  margin: 1.35em 0;
+  padding: 12px 16px;
+  overflow-x: auto;
+  text-align: center;
+  border-radius: var(--radius-md);
+  background: var(--bg-chrome);
+  border: 1px solid var(--border-subtle);
+  direction: ltr;
+}
+
+.vellum-prose .katex-display {
+  margin: 0;
+}
+
+/* Mermaid Diagrams */
+.vellum-mermaid {
+  margin: 1.4em 0;
+  padding: 18px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-elevated);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: auto;
+  cursor: zoom-in;
+  box-shadow: var(--shadow-sm);
+  direction: ltr;
+}
+
+.vellum-mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+
+.vellum-mermaid-loading {
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: 0.84rem;
+}
+
+.vellum-mermaid-error {
+  width: 100%;
+  color: var(--danger);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  white-space: pre-wrap;
+}
+
+/* Footnotes */
+.vellum-prose .footnotes {
+  margin-top: 2.5em;
+  font-size: 0.88em;
+  color: var(--text-secondary);
+}
+
+.vellum-prose .footnotes-sep {
+  margin-bottom: 1.2em;
+}
+
+/* In-page Find Highlights */
+mark.vellum-find-match {
+  background: rgba(250, 204, 21, 0.36);
+  color: inherit;
+  padding: 0;
+  border-radius: 2px;
+}
+
+mark.vellum-find-match.active {
+  background: rgba(249, 115, 22, 0.65);
+  color: #ffffff;
+  outline: 2px solid rgba(249, 115, 22, 0.5);
+}
+
+/* Print & PDF Export Styles */
+@media print {
+  :root,
+  :root[data-theme='dark'],
+  :root[data-theme='paper'],
+  :root[data-theme='light'] {
+    --bg-app: #ffffff;
+    --bg-chrome: #f6f6f4;
+    --bg-elevated: #ffffff;
+    --bg-subtle: #f1f0ec;
+    --bg-code: #f7f6f2;
+    --bg-code-header: #efede8;
+    --text-primary: #1a1917;
+    --text-secondary: #4e4b45;
+    --text-muted: #767168;
+    --border-subtle: #e4e2dc;
+    --border-strong: #c9c5bc;
+    --accent: #2f4bc4;
+    --accent-text: #2b47b8;
+  }
+
+  html,
+  body,
+  #root,
+  .app-shell,
+  .workspace-body,
+  .main-stage,
+  .preview-pane,
+  .preview-scroll {
+    height: auto !important;
+    overflow: visible !important;
+    display: block !important;
+    background: #ffffff !important;
+    position: static !important;
+  }
+
+  .titlebar,
+  .sidebar,
+  .outline-panel,
+  .formatting-toolbar,
+  .statusbar,
+  .find-bar,
+  .editor-pane,
+  .split-resizer,
+  .vellum-copy-btn,
+  .vellum-modal-backdrop,
+  .reading-progress,
+  .drop-overlay,
+  .external-banner,
+  .heading-anchor {
+    display: none !important;
+  }
+
+  .vellum-prose-shell {
+    max-width: 100% !important;
+    padding: 0 !important;
+    font-size: 11pt !important;
+    line-height: 1.62 !important;
+  }
+
+  .vellum-code-block,
+  .vellum-alert,
+  .vellum-mermaid,
+  .vellum-table-wrap,
+  blockquote {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+}

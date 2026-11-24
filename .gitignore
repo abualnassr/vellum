@@ -1,0 +1,22 @@
+# Build outputs
+dist/
+src/Vellum/wwwroot/
+**/bin/
+**/obj/
+
+# Dependencies
+ui/node_modules/
+
+# IDE & OS
+.vs/
+.vscode/
+*.user
+*.suo
+*.sln.docstates
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs & local caches
+*.log
+npm-debug.log*

@@ -1,0 +1,142 @@
+/* Harmonized Highlight.js token palettes across Ivory Light, Warm Paper, and Obsidian Night */
+.hljs {
+  color: var(--text-primary);
+  background: transparent;
+}
+
+:root[data-theme='light'] .hljs-comment,
+:root[data-theme='paper'] .hljs-comment,
+:root[data-theme='light'] .hljs-quote,
+:root[data-theme='paper'] .hljs-quote {
+  color: #7c756c;
+  font-style: italic;
+}
+
+:root[data-theme='light'] .hljs-keyword,
+:root[data-theme='paper'] .hljs-keyword,
+:root[data-theme='light'] .hljs-selector-tag,
+:root[data-theme='paper'] .hljs-selector-tag,
+:root[data-theme='light'] .hljs-subst,
+:root[data-theme='paper'] .hljs-subst {
+  color: #9e3061;
+  font-weight: 500;
+}
+
+:root[data-theme='light'] .hljs-string,
+:root[data-theme='paper'] .hljs-string,
+:root[data-theme='light'] .hljs-doctag,
+:root[data-theme='paper'] .hljs-doctag,
+:root[data-theme='light'] .hljs-regexp,
+:root[data-theme='paper'] .hljs-regexp {
+  color: #216e4e;
+}
+
+:root[data-theme='light'] .hljs-number,
+:root[data-theme='paper'] .hljs-number,
+:root[data-theme='light'] .hljs-literal,
+:root[data-theme='paper'] .hljs-literal,
+:root[data-theme='light'] .hljs-variable,
+:root[data-theme='paper'] .hljs-variable,
+:root[data-theme='light'] .hljs-template-variable,
+:root[data-theme='paper'] .hljs-template-variable,
+:root[data-theme='light'] .hljs-attr,
+:root[data-theme='paper'] .hljs-attr {
+  color: #b45309;
+}
+
+:root[data-theme='light'] .hljs-title,
+:root[data-theme='paper'] .hljs-title,
+:root[data-theme='light'] .hljs-section,
+:root[data-theme='paper'] .hljs-section,
+:root[data-theme='light'] .hljs-selector-id,
+:root[data-theme='paper'] .hljs-selector-id {
+  color: #2c4cb8;
+  font-weight: 600;
+}
+
+:root[data-theme='light'] .hljs-type,
+:root[data-theme='paper'] .hljs-type,
+:root[data-theme='light'] .hljs-built_in,
+:root[data-theme='paper'] .hljs-built_in,
+:root[data-theme='light'] .hljs-class .hljs-title,
+:root[data-theme='paper'] .hljs-class .hljs-title {
+  color: #7c3aed;
+}
+
+:root[data-theme='light'] .hljs-tag,
+:root[data-theme='paper'] .hljs-tag,
+:root[data-theme='light'] .hljs-name,
+:root[data-theme='paper'] .hljs-name,
+:root[data-theme='light'] .hljs-attribute,
+:root[data-theme='paper'] .hljs-attribute {
+  color: #0e7490;
+}
+
+:root[data-theme='light'] .hljs-addition,
+:root[data-theme='paper'] .hljs-addition {
+  color: #166534;
+  background: rgba(22, 101, 52, 0.1);
+}
+
+:root[data-theme='light'] .hljs-deletion,
+:root[data-theme='paper'] .hljs-deletion {
+  color: #991b1b;
+  background: rgba(153, 27, 27, 0.1);
+}
+
+/* Dark theme tokens (Tokyo Night / Obsidian inspired) */
+:root[data-theme='dark'] .hljs-comment,
+:root[data-theme='dark'] .hljs-quote {
+  color: #6b738f;
+  font-style: italic;
+}
+
+:root[data-theme='dark'] .hljs-keyword,
+:root[data-theme='dark'] .hljs-selector-tag,
+:root[data-theme='dark'] .hljs-subst {
+  color: #bb9af7;
+  font-weight: 500;
+}
+
+:root[data-theme='dark'] .hljs-string,
+:root[data-theme='dark'] .hljs-doctag,
+:root[data-theme='dark'] .hljs-regexp {
+  color: #9ece6a;
+}
+
+:root[data-theme='dark'] .hljs-number,
+:root[data-theme='dark'] .hljs-literal,
+:root[data-theme='dark'] .hljs-variable,
+:root[data-theme='dark'] .hljs-template-variable,
+:root[data-theme='dark'] .hljs-attr {
+  color: #ff9e64;
+}
+
+:root[data-theme='dark'] .hljs-title,
+:root[data-theme='dark'] .hljs-section,
+:root[data-theme='dark'] .hljs-selector-id {
+  color: #7aa2f7;
+  font-weight: 600;
+}
+
+:root[data-theme='dark'] .hljs-type,
+:root[data-theme='dark'] .hljs-built_in,
+:root[data-theme='dark'] .hljs-class .hljs-title {
+  color: #2ac3de;
+}
+
+:root[data-theme='dark'] .hljs-tag,
+:root[data-theme='dark'] .hljs-name,
+:root[data-theme='dark'] .hljs-attribute {
+  color: #7dcfff;
+}
+
+:root[data-theme='dark'] .hljs-addition {
+  color: #73daca;
+  background: rgba(115, 218, 202, 0.12);
+}
+
+:root[data-theme='dark'] .hljs-deletion {
+  color: #f7768e;
+  background: rgba(247, 118, 142, 0.12);
+}
