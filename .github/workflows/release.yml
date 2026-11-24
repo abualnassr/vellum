@@ -49,19 +49,20 @@ jobs:
         shell: pwsh
         run: |
           ./scripts/build.ps1
-          Compress-Archive -Path dist/Vellum.exe -DestinationPath dist/Vellum-win-x64-lightweight.zip -Force
+          New-Item -ItemType Directory -Force -Path release-assets | Out-Null
+          Compress-Archive -Path dist/Vellum.exe -DestinationPath release-assets/Vellum-win-x64-lightweight.zip -Force
 
       - name: Publish standalone self-contained exe
         shell: pwsh
         run: |
           ./scripts/build.ps1 -SelfContained -SkipUiBuild
-          Compress-Archive -Path dist/Vellum.exe -DestinationPath dist/Vellum-win-x64-standalone.zip -Force
+          Compress-Archive -Path dist/Vellum.exe -DestinationPath release-assets/Vellum-win-x64-standalone.zip -Force
 
       - name: Create GitHub Release
         if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            dist/Vellum-win-x64-lightweight.zip
-            dist/Vellum-win-x64-standalone.zip
+            release-assets/Vellum-win-x64-lightweight.zip
+            release-assets/Vellum-win-x64-standalone.zip
           generate_release_notes: true
