@@ -1,5 +1,14 @@
-export type ThemeMode = 'system' | 'light' | 'dark' | 'paper';
-export type ResolvedTheme = 'light' | 'dark' | 'paper';
+export type ThemeMode =
+  | 'system'
+  | 'light'
+  | 'dark'
+  | 'paper'
+  | 'snow'
+  | 'charcoal'
+  | 'sepia-dark'
+  | 'nord'
+  | 'oled';
+export type ResolvedTheme = Exclude<ThemeMode, 'system'>;
 export type ReadingFont = 'sans' | 'serif';
 export type ReadingWidth = 'narrow' | 'comfortable' | 'wide' | 'full';
 export type ViewMode = 'read' | 'split' | 'source';
@@ -22,6 +31,7 @@ export interface SpellLanguagesInfo {
 
 export interface AppSettings {
   theme: ThemeMode;
+  accentColor: string;
   readingFont: ReadingFont;
   readingFontSize: number;
   editorFontSize: number;

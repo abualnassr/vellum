@@ -51,41 +51,44 @@ public partial class MainWindow : Window
         Loaded += OnWindowLoaded;
     }
 
+    private static (bool IsDark, byte R, byte G, byte B) ResolveThemeChrome(string? theme)
+    {
+        return theme switch
+        {
+            "light" => (false, 0xFA, 0xF9, 0xF6),
+            "paper" => (false, 0xF6, 0xF0, 0xE6),
+            "snow" => (false, 0xF8, 0xFA, 0xFC),
+            "dark" => (true, 0x11, 0x13, 0x18),
+            "charcoal" => (true, 0x1E, 0x1E, 0x1E),
+            "sepia-dark" => (true, 0x1F, 0x1D, 0x1A),
+            "nord" => (true, 0x2E, 0x34, 0x40),
+            "oled" => (true, 0x00, 0x00, 0x00),
+            _ => IsSystemDarkMode()
+                ? (true, (byte)0x11, (byte)0x13, (byte)0x18)
+                : (false, (byte)0xFA, (byte)0xF9, (byte)0xF6),
+        };
+    }
+
     private void ApplyPreShowTheme(string theme)
     {
-        bool systemDark = IsSystemDarkMode();
-        string resolved = theme switch
-        {
-            "dark" => "dark",
-            "paper" => "paper",
-            "light" => "light",
-            _ => systemDark ? "dark" : "light",
-        };
-
-        _isDarkInitial = resolved == "dark";
-        var wpfBg = resolved switch
-        {
-            "dark" => Color.FromRgb(0x11, 0x13, 0x18),
-            "paper" => Color.FromRgb(0xF6, 0xF0, 0xE6),
-            _ => Color.FromRgb(0xFA, 0xF9, 0xF6),
-        };
-        Background = new SolidColorBrush(wpfBg);
+        var (isDark, r, g, b) = ResolveThemeChrome(theme);
+        _isDarkInitial = isDark;
+        Background = new SolidColorBrush(Color.FromRgb(r, g, b));
     }
 
     public void ApplyRuntimeTheme(string theme)
     {
-        ApplyPreShowTheme(theme);
+        var (isDark, r, g, b) = ResolveThemeChrome(theme);
+        _isDarkInitial = isDark;
+        Background = new SolidColorBrush(Color.FromRgb(r, g, b));
+
         if (WebView?.CoreWebView2 != null)
         {
-            WebView.DefaultBackgroundColor = theme == "paper"
-                ? System.Drawing.Color.FromArgb(255, 0xF6, 0xF0, 0xE6)
-                : _isDarkInitial
-                ? System.Drawing.Color.FromArgb(255, 0x11, 0x13, 0x18)
-                : System.Drawing.Color.FromArgb(255, 0xFA, 0xF9, 0xF6);
+            WebView.DefaultBackgroundColor = System.Drawing.Color.FromArgb(255, r, g, b);
         }
 
         IntPtr hwnd = new WindowInteropHelper(this).Handle;
-        Win32Interop.ApplyWindowFrameAttributes(hwnd, _isDarkInitial);
+        Win32Interop.ApplyWindowFrameAttributes(hwnd, isDark);
     }
 
     private static bool IsSystemDarkMode()
@@ -162,12 +165,8 @@ public partial class MainWindow : Window
         try
         {
             var settings = _settingsService.Load();
-            bool dark = settings.Theme == "dark" || (settings.Theme == "system" && IsSystemDarkMode());
-            WebView.DefaultBackgroundColor = settings.Theme == "paper"
-                ? System.Drawing.Color.FromArgb(255, 0xF6, 0xF0, 0xE6)
-                : dark
-                ? System.Drawing.Color.FromArgb(255, 0x11, 0x13, 0x18)
-                : System.Drawing.Color.FromArgb(255, 0xFA, 0xF9, 0xF6);
+            var (_, r, g, b) = ResolveThemeChrome(settings.Theme);
+            WebView.DefaultBackgroundColor = System.Drawing.Color.FromArgb(255, r, g, b);
 
             string userDataFolder = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),

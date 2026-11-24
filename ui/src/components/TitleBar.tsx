@@ -21,6 +21,7 @@ import {
   X,
 } from 'lucide-react';
 import type { ResolvedTheme, TabDoc, ThemeMode, ViewMode } from '../bridge/types';
+import { getThemeLabel, isDarkTheme } from '../utils/themeAccent';
 
 interface TitleBarProps {
   tabs: TabDoc[];
@@ -126,14 +127,7 @@ export function TitleBar({
     fn();
   };
 
-  const themeLabel =
-    themeMode === 'system'
-      ? `System (${resolvedTheme})`
-      : themeMode === 'light'
-      ? 'Ivory Light'
-      : themeMode === 'dark'
-      ? 'Obsidian Night'
-      : 'Warm Paper';
+  const themeLabel = getThemeLabel(themeMode, resolvedTheme);
 
   return (
     <header
@@ -379,10 +373,10 @@ export function TitleBar({
           title={`Theme: ${themeLabel} (Click to switch)`}
           aria-label="Switch Theme"
         >
-          {resolvedTheme === 'dark' ? (
-            <Moon size={15} />
-          ) : resolvedTheme === 'paper' ? (
+          {resolvedTheme === 'paper' ? (
             <ScrollText size={15} />
+          ) : isDarkTheme(resolvedTheme) ? (
+            <Moon size={15} />
           ) : (
             <Sun size={15} />
           )}

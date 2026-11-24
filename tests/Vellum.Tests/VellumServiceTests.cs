@@ -92,6 +92,7 @@ public class VellumServiceTests : IDisposable
         var input = new AppSettings
         {
             Theme = "paper",
+            AccentColor = "#FFD400",
             ReadingFont = "serif",
             ReadingFontSize = 18,
             ReadingWidth = "wide",
@@ -110,6 +111,7 @@ public class VellumServiceTests : IDisposable
         var loaded = svc.Load();
 
         Assert.Equal("paper", loaded.Theme);
+        Assert.Equal("#FFD400", loaded.AccentColor);
         Assert.Equal("serif", loaded.ReadingFont);
         Assert.Equal(18, loaded.ReadingFontSize);
         Assert.Equal("wide", loaded.ReadingWidth);
@@ -123,6 +125,13 @@ public class VellumServiceTests : IDisposable
         Assert.Equal(@"C:\Docs\two.md", loaded.LastSessionActivePath);
         Assert.Single(loaded.RecentFiles);
         Assert.Equal(@"C:\Docs\one.md", loaded.RecentFiles[0]);
+
+        foreach (string theme in new[] { "snow", "charcoal", "sepia-dark", "nord", "oled" })
+        {
+            loaded.Theme = theme;
+            svc.Save(loaded);
+            Assert.Equal(theme, svc.Load().Theme);
+        }
     }
 
     [Fact]

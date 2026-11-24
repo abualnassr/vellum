@@ -22,6 +22,7 @@ import type {
 import { SHOWCASE_MARKDOWN } from './bridge/welcomeDoc';
 import { renderMarkdownDocument, toggleTaskAtLine, type TocItem } from './markdown/engine';
 import { buildStandaloneHtml } from './utils/exportHtml';
+import { applyAccentToRoot, getThemeLabel, THEME_OPTIONS } from './utils/themeAccent';
 import { TitleBar } from './components/TitleBar';
 import { Sidebar } from './components/Sidebar';
 import { OutlinePanel } from './components/OutlinePanel';
@@ -130,10 +131,11 @@ export default function App() {
     return settings.theme;
   }, [settings.theme, systemDark]);
 
-  // Apply CSS custom properties & data-theme immediately
+  // Apply CSS custom properties, data-theme, and contrast-safe accent overrides immediately
   useEffect(() => {
     const root = document.documentElement;
     root.setAttribute('data-theme', resolvedTheme);
+    applyAccentToRoot(root, settings.accentColor, resolvedTheme);
     root.style.setProperty('--reading-measure', MEASURE_MAP[settings.readingWidth]);
     root.style.setProperty('--reading-size', `${settings.readingFontSize}px`);
     root.style.setProperty('--editor-size', `${settings.editorFontSize}px`);
@@ -146,6 +148,7 @@ export default function App() {
   }, [
     resolvedTheme,
     settings.theme,
+    settings.accentColor,
     settings.readingWidth,
     settings.readingFontSize,
     settings.editorFontSize,
@@ -716,18 +719,11 @@ export default function App() {
   );
 
   const cycleTheme = useCallback(() => {
-    const order: ThemeMode[] = ['light', 'dark', 'paper', 'system'];
-    const next = order[(order.indexOf(settings.theme) + 1) % order.length];
+    const order: ThemeMode[] = THEME_OPTIONS.map((t) => t.id);
+    const curIdx = order.indexOf(settings.theme);
+    const next = order[(curIdx + 1) % order.length];
     updateSettings({ theme: next });
-    const label =
-      next === 'light'
-        ? 'Ivory Light'
-        : next === 'dark'
-        ? 'Obsidian Night'
-        : next === 'paper'
-        ? 'Warm Paper'
-        : 'System Theme';
-    showToast(label);
+    showToast(getThemeLabel(next));
   }, [settings.theme, updateSettings, showToast]);
 
   const exportPdf = useCallback(async () => {
@@ -772,7 +768,8 @@ export default function App() {
         rendered.html,
         rendered.frontmatter,
         resolvedTheme,
-        effectiveDir
+        effectiveDir,
+        settings.accentColor
       );
       const res = await invokeBridge<{ saved: boolean }>('export:html', {
         suggestedName: `${base}.html`,
@@ -782,7 +779,7 @@ export default function App() {
     } catch (err) {
       showToast(err instanceof Error ? err.message : 'HTML export failed');
     }
-  }, [activeTab, rendered, resolvedTheme, settings.textDirection, showToast]);
+  }, [activeTab, rendered, resolvedTheme, settings.textDirection, settings.accentColor, showToast]);
 
   const cycleTextDirection = useCallback(() => {
     const order: TextDirection[] = ['auto', 'ltr', 'rtl'];
@@ -1111,6 +1108,36 @@ export default function App() {
         category: 'Theme',
         label: 'Theme: Warm Paper',
         run: () => updateSettings({ theme: 'paper' }),
+      },
+      {
+        id: 'theme:snow',
+        category: 'Theme',
+        label: 'Theme: Snow (Cool Slate Light)',
+        run: () => updateSettings({ theme: 'snow' }),
+      },
+      {
+        id: 'theme:charcoal',
+        category: 'Theme',
+        label: 'Theme: Charcoal (Soft Dark)',
+        run: () => updateSettings({ theme: 'charcoal' }),
+      },
+      {
+        id: 'theme:sepia-dark',
+        category: 'Theme',
+        label: 'Theme: Sepia Dark (Warm Dark)',
+        run: () => updateSettings({ theme: 'sepia-dark' }),
+      },
+      {
+        id: 'theme:nord',
+        category: 'Theme',
+        label: 'Theme: Nord (Cool Slate Dark)',
+        run: () => updateSettings({ theme: 'nord' }),
+      },
+      {
+        id: 'theme:oled',
+        category: 'Theme',
+        label: 'Theme: OLED (Pure Black)',
+        run: () => updateSettings({ theme: 'oled' }),
       },
       {
         id: 'theme:system',

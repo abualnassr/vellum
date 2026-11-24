@@ -25,6 +25,7 @@ declare global {
 
 export const DEFAULT_SETTINGS: AppSettings = {
   theme: 'system',
+  accentColor: 'default',
   readingFont: 'sans',
   readingFontSize: 16,
   editorFontSize: 14,

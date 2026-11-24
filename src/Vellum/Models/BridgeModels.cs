@@ -5,6 +5,7 @@ namespace Vellum.Models;
 public sealed class AppSettings
 {
     public string Theme { get; set; } = "system";
+    public string AccentColor { get; set; } = "default";
     public string ReadingFont { get; set; } = "sans";
     public int ReadingFontSize { get; set; } = 16;
     public int EditorFontSize { get; set; } = 14;

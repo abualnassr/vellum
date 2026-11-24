@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { CheckCircle2, ExternalLink, X } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Check, CheckCircle2, ExternalLink, X } from 'lucide-react';
 import type {
   AppSettings,
   AssocStatus,
@@ -8,9 +8,14 @@ import type {
   SpellLanguagesInfo,
   StartupView,
   TextDirection,
-  ThemeMode,
   ViewMode,
 } from '../bridge/types';
+import {
+  ACCENT_PRESETS,
+  normalizeHexColor,
+  relativeLuminance,
+  THEME_OPTIONS,
+} from '../utils/themeAccent';
 
 interface SettingsModalProps {
   settings: AppSettings;
@@ -34,6 +39,43 @@ export function SettingsModal({
   onClose,
 }: SettingsModalProps) {
   const [tab, setTab] = useState<'general' | 'appearance' | 'editor' | 'windows'>('general');
+  const [hexInput, setHexInput] = useState<string>(() =>
+    settings.accentColor === 'default' || !settings.accentColor
+      ? '#3B5BDB'
+      : normalizeHexColor(settings.accentColor) ?? '#3B5BDB'
+  );
+
+  useEffect(() => {
+    setHexInput(
+      settings.accentColor === 'default' || !settings.accentColor
+        ? '#3B5BDB'
+        : normalizeHexColor(settings.accentColor) ?? '#3B5BDB'
+    );
+  }, [settings.accentColor]);
+
+  const normalizedAccent =
+    settings.accentColor === 'default' || !settings.accentColor
+      ? 'default'
+      : normalizeHexColor(settings.accentColor) ?? 'default';
+
+  const isPresetMatch = (presetId: string) =>
+    presetId === 'default' ? normalizedAccent === 'default' : normalizedAccent === presetId;
+
+  const isCustomAccentActive =
+    normalizedAccent !== 'default' &&
+    !ACCENT_PRESETS.some((p) => p.id !== 'default' && p.id === normalizedAccent);
+
+  const pickerHex = normalizedAccent === 'default' ? '#3B5BDB' : normalizedAccent;
+
+  const commitHexInput = (raw: string) => {
+    const parsed = normalizeHexColor(raw);
+    if (parsed) {
+      setHexInput(parsed);
+      onUpdateSettings({ accentColor: parsed });
+    } else {
+      setHexInput(pickerHex);
+    }
+  };
 
   return (
     <div className="vellum-modal-backdrop centered" onClick={onClose}>
@@ -161,28 +203,108 @@ export function SettingsModal({
 
           {tab === 'appearance' && (
             <>
-              <div className="setting-row">
+              <div className="setting-row setting-row-top">
                 <div>
                   <div className="setting-title">Color Theme</div>
                   <div className="setting-desc">Switch palette or follow Windows appearance.</div>
                 </div>
-                <div className="theme-swatches">
-                  {(['system', 'light', 'dark', 'paper'] as ThemeMode[]).map((t) => (
+                <div className="theme-swatches theme-swatches-grid">
+                  {THEME_OPTIONS.map((t) => (
                     <button
-                      key={t}
+                      key={t.id}
                       type="button"
-                      className={`swatch-btn ${settings.theme === t ? 'active' : ''}`}
-                      onClick={() => onUpdateSettings({ theme: t })}
+                      className={`swatch-btn ${settings.theme === t.id ? 'active' : ''}`}
+                      onClick={() => onUpdateSettings({ theme: t.id })}
                     >
-                      {t === 'system'
-                        ? 'System'
-                        : t === 'light'
-                        ? 'Ivory'
-                        : t === 'dark'
-                        ? 'Obsidian'
-                        : 'Paper'}
+                      {t.label}
                     </button>
                   ))}
+                </div>
+              </div>
+
+              <div className="setting-row">
+                <div>
+                  <div className="setting-title">Accent Color</div>
+                  <div className="setting-desc">
+                    Highlight color for links, active controls, and checkboxes.
+                  </div>
+                </div>
+                <div className="accent-controls">
+                  <div className="accent-swatches" role="radiogroup" aria-label="Accent Color">
+                    {ACCENT_PRESETS.map((preset) => {
+                      const active = isPresetMatch(preset.id);
+                      const checkInk = relativeLuminance(preset.swatch) > 0.36 ? '#18181B' : '#FFFFFF';
+                      return (
+                        <button
+                          key={preset.id}
+                          type="button"
+                          role="radio"
+                          aria-checked={active}
+                          aria-label={preset.label}
+                          title={`${preset.label} (${preset.swatch})`}
+                          className={`accent-swatch ${active ? 'active' : ''}`}
+                          style={{ backgroundColor: preset.swatch, color: checkInk }}
+                          onClick={() => onUpdateSettings({ accentColor: preset.id })}
+                        >
+                          {active && <Check size={13} strokeWidth={2.75} />}
+                        </button>
+                      );
+                    })}
+
+                    <label
+                      className={`accent-swatch accent-swatch-custom ${isCustomAccentActive ? 'active' : ''}`}
+                      title={
+                        isCustomAccentActive
+                          ? `Custom Accent (${pickerHex})`
+                          : 'Pick Custom Accent Color'
+                      }
+                      style={
+                        isCustomAccentActive
+                          ? {
+                              background: pickerHex,
+                              color: relativeLuminance(pickerHex) > 0.36 ? '#18181B' : '#FFFFFF',
+                            }
+                          : undefined
+                      }
+                    >
+                      {isCustomAccentActive && <Check size={13} strokeWidth={2.75} />}
+                      <input
+                        type="color"
+                        aria-label="Custom accent color picker"
+                        value={pickerHex}
+                        onChange={(e) => {
+                          const normalized =
+                            normalizeHexColor(e.target.value) ?? e.target.value.toUpperCase();
+                          onUpdateSettings({ accentColor: normalized });
+                        }}
+                      />
+                    </label>
+                  </div>
+
+                  <input
+                    type="text"
+                    className="accent-hex-input"
+                    aria-label="Custom accent hex color"
+                    value={hexInput}
+                    placeholder="#3B5BDB"
+                    maxLength={7}
+                    onChange={(e) => {
+                      const raw = e.target.value;
+                      setHexInput(raw);
+                      if (/^#?[0-9a-fA-F]{6}$/.test(raw.trim())) {
+                        const parsed = normalizeHexColor(raw);
+                        if (parsed) onUpdateSettings({ accentColor: parsed });
+                      }
+                    }}
+                    onBlur={() => commitHexInput(hexInput)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        commitHexInput(hexInput);
+                      } else if (e.key === 'Escape') {
+                        setHexInput(pickerHex);
+                      }
+                    }}
+                  />
                 </div>
               </div>
 

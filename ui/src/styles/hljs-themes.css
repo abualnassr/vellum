@@ -1,4 +1,4 @@
-/* Harmonized Highlight.js token palettes across Ivory Light, Warm Paper, and Obsidian Night */
+/* Harmonized Highlight.js token palettes across Light and Dark presets */
 .hljs {
   color: var(--text-primary);
   background: transparent;
@@ -6,137 +6,257 @@
 
 :root[data-theme='light'] .hljs-comment,
 :root[data-theme='paper'] .hljs-comment,
+:root[data-theme='snow'] .hljs-comment,
 :root[data-theme='light'] .hljs-quote,
-:root[data-theme='paper'] .hljs-quote {
+:root[data-theme='paper'] .hljs-quote,
+:root[data-theme='snow'] .hljs-quote {
   color: #7c756c;
   font-style: italic;
 }
 
 :root[data-theme='light'] .hljs-keyword,
 :root[data-theme='paper'] .hljs-keyword,
+:root[data-theme='snow'] .hljs-keyword,
 :root[data-theme='light'] .hljs-selector-tag,
 :root[data-theme='paper'] .hljs-selector-tag,
+:root[data-theme='snow'] .hljs-selector-tag,
 :root[data-theme='light'] .hljs-subst,
-:root[data-theme='paper'] .hljs-subst {
+:root[data-theme='paper'] .hljs-subst,
+:root[data-theme='snow'] .hljs-subst {
   color: #9e3061;
   font-weight: 500;
 }
 
 :root[data-theme='light'] .hljs-string,
 :root[data-theme='paper'] .hljs-string,
+:root[data-theme='snow'] .hljs-string,
 :root[data-theme='light'] .hljs-doctag,
 :root[data-theme='paper'] .hljs-doctag,
+:root[data-theme='snow'] .hljs-doctag,
 :root[data-theme='light'] .hljs-regexp,
-:root[data-theme='paper'] .hljs-regexp {
+:root[data-theme='paper'] .hljs-regexp,
+:root[data-theme='snow'] .hljs-regexp {
   color: #216e4e;
 }
 
 :root[data-theme='light'] .hljs-number,
 :root[data-theme='paper'] .hljs-number,
+:root[data-theme='snow'] .hljs-number,
 :root[data-theme='light'] .hljs-literal,
 :root[data-theme='paper'] .hljs-literal,
+:root[data-theme='snow'] .hljs-literal,
 :root[data-theme='light'] .hljs-variable,
 :root[data-theme='paper'] .hljs-variable,
+:root[data-theme='snow'] .hljs-variable,
 :root[data-theme='light'] .hljs-template-variable,
 :root[data-theme='paper'] .hljs-template-variable,
+:root[data-theme='snow'] .hljs-template-variable,
 :root[data-theme='light'] .hljs-attr,
-:root[data-theme='paper'] .hljs-attr {
+:root[data-theme='paper'] .hljs-attr,
+:root[data-theme='snow'] .hljs-attr {
   color: #b45309;
 }
 
 :root[data-theme='light'] .hljs-title,
 :root[data-theme='paper'] .hljs-title,
+:root[data-theme='snow'] .hljs-title,
 :root[data-theme='light'] .hljs-section,
 :root[data-theme='paper'] .hljs-section,
+:root[data-theme='snow'] .hljs-section,
 :root[data-theme='light'] .hljs-selector-id,
-:root[data-theme='paper'] .hljs-selector-id {
+:root[data-theme='paper'] .hljs-selector-id,
+:root[data-theme='snow'] .hljs-selector-id {
   color: #2c4cb8;
   font-weight: 600;
 }
 
 :root[data-theme='light'] .hljs-type,
 :root[data-theme='paper'] .hljs-type,
+:root[data-theme='snow'] .hljs-type,
 :root[data-theme='light'] .hljs-built_in,
 :root[data-theme='paper'] .hljs-built_in,
+:root[data-theme='snow'] .hljs-built_in,
 :root[data-theme='light'] .hljs-class .hljs-title,
-:root[data-theme='paper'] .hljs-class .hljs-title {
+:root[data-theme='paper'] .hljs-class .hljs-title,
+:root[data-theme='snow'] .hljs-class .hljs-title {
   color: #7c3aed;
 }
 
 :root[data-theme='light'] .hljs-tag,
 :root[data-theme='paper'] .hljs-tag,
+:root[data-theme='snow'] .hljs-tag,
 :root[data-theme='light'] .hljs-name,
 :root[data-theme='paper'] .hljs-name,
+:root[data-theme='snow'] .hljs-name,
 :root[data-theme='light'] .hljs-attribute,
-:root[data-theme='paper'] .hljs-attribute {
+:root[data-theme='paper'] .hljs-attribute,
+:root[data-theme='snow'] .hljs-attribute {
   color: #0e7490;
 }
 
 :root[data-theme='light'] .hljs-addition,
-:root[data-theme='paper'] .hljs-addition {
+:root[data-theme='paper'] .hljs-addition,
+:root[data-theme='snow'] .hljs-addition {
   color: #166534;
   background: rgba(22, 101, 52, 0.1);
 }
 
 :root[data-theme='light'] .hljs-deletion,
-:root[data-theme='paper'] .hljs-deletion {
+:root[data-theme='paper'] .hljs-deletion,
+:root[data-theme='snow'] .hljs-deletion {
   color: #991b1b;
   background: rgba(153, 27, 27, 0.1);
 }
 
-/* Dark theme tokens (Tokyo Night / Obsidian inspired) */
+/* Dark theme tokens */
 :root[data-theme='dark'] .hljs-comment,
-:root[data-theme='dark'] .hljs-quote {
+:root[data-theme='charcoal'] .hljs-comment,
+:root[data-theme='sepia-dark'] .hljs-comment,
+:root[data-theme='nord'] .hljs-comment,
+:root[data-theme='oled'] .hljs-comment,
+:root[data-theme='dark'] .hljs-quote,
+:root[data-theme='charcoal'] .hljs-quote,
+:root[data-theme='sepia-dark'] .hljs-quote,
+:root[data-theme='nord'] .hljs-quote,
+:root[data-theme='oled'] .hljs-quote {
   color: #6b738f;
   font-style: italic;
 }
 
 :root[data-theme='dark'] .hljs-keyword,
+:root[data-theme='charcoal'] .hljs-keyword,
+:root[data-theme='sepia-dark'] .hljs-keyword,
+:root[data-theme='nord'] .hljs-keyword,
+:root[data-theme='oled'] .hljs-keyword,
 :root[data-theme='dark'] .hljs-selector-tag,
-:root[data-theme='dark'] .hljs-subst {
+:root[data-theme='charcoal'] .hljs-selector-tag,
+:root[data-theme='sepia-dark'] .hljs-selector-tag,
+:root[data-theme='nord'] .hljs-selector-tag,
+:root[data-theme='oled'] .hljs-selector-tag,
+:root[data-theme='dark'] .hljs-subst,
+:root[data-theme='charcoal'] .hljs-subst,
+:root[data-theme='sepia-dark'] .hljs-subst,
+:root[data-theme='nord'] .hljs-subst,
+:root[data-theme='oled'] .hljs-subst {
   color: #bb9af7;
   font-weight: 500;
 }
 
 :root[data-theme='dark'] .hljs-string,
+:root[data-theme='charcoal'] .hljs-string,
+:root[data-theme='sepia-dark'] .hljs-string,
+:root[data-theme='nord'] .hljs-string,
+:root[data-theme='oled'] .hljs-string,
 :root[data-theme='dark'] .hljs-doctag,
-:root[data-theme='dark'] .hljs-regexp {
+:root[data-theme='charcoal'] .hljs-doctag,
+:root[data-theme='sepia-dark'] .hljs-doctag,
+:root[data-theme='nord'] .hljs-doctag,
+:root[data-theme='oled'] .hljs-doctag,
+:root[data-theme='dark'] .hljs-regexp,
+:root[data-theme='charcoal'] .hljs-regexp,
+:root[data-theme='sepia-dark'] .hljs-regexp,
+:root[data-theme='nord'] .hljs-regexp,
+:root[data-theme='oled'] .hljs-regexp {
   color: #9ece6a;
 }
 
 :root[data-theme='dark'] .hljs-number,
+:root[data-theme='charcoal'] .hljs-number,
+:root[data-theme='sepia-dark'] .hljs-number,
+:root[data-theme='nord'] .hljs-number,
+:root[data-theme='oled'] .hljs-number,
 :root[data-theme='dark'] .hljs-literal,
+:root[data-theme='charcoal'] .hljs-literal,
+:root[data-theme='sepia-dark'] .hljs-literal,
+:root[data-theme='nord'] .hljs-literal,
+:root[data-theme='oled'] .hljs-literal,
 :root[data-theme='dark'] .hljs-variable,
+:root[data-theme='charcoal'] .hljs-variable,
+:root[data-theme='sepia-dark'] .hljs-variable,
+:root[data-theme='nord'] .hljs-variable,
+:root[data-theme='oled'] .hljs-variable,
 :root[data-theme='dark'] .hljs-template-variable,
-:root[data-theme='dark'] .hljs-attr {
+:root[data-theme='charcoal'] .hljs-template-variable,
+:root[data-theme='sepia-dark'] .hljs-template-variable,
+:root[data-theme='nord'] .hljs-template-variable,
+:root[data-theme='oled'] .hljs-template-variable,
+:root[data-theme='dark'] .hljs-attr,
+:root[data-theme='charcoal'] .hljs-attr,
+:root[data-theme='sepia-dark'] .hljs-attr,
+:root[data-theme='nord'] .hljs-attr,
+:root[data-theme='oled'] .hljs-attr {
   color: #ff9e64;
 }
 
 :root[data-theme='dark'] .hljs-title,
+:root[data-theme='charcoal'] .hljs-title,
+:root[data-theme='sepia-dark'] .hljs-title,
+:root[data-theme='nord'] .hljs-title,
+:root[data-theme='oled'] .hljs-title,
 :root[data-theme='dark'] .hljs-section,
-:root[data-theme='dark'] .hljs-selector-id {
+:root[data-theme='charcoal'] .hljs-section,
+:root[data-theme='sepia-dark'] .hljs-section,
+:root[data-theme='nord'] .hljs-section,
+:root[data-theme='oled'] .hljs-section,
+:root[data-theme='dark'] .hljs-selector-id,
+:root[data-theme='charcoal'] .hljs-selector-id,
+:root[data-theme='sepia-dark'] .hljs-selector-id,
+:root[data-theme='nord'] .hljs-selector-id,
+:root[data-theme='oled'] .hljs-selector-id {
   color: #7aa2f7;
   font-weight: 600;
 }
 
 :root[data-theme='dark'] .hljs-type,
+:root[data-theme='charcoal'] .hljs-type,
+:root[data-theme='sepia-dark'] .hljs-type,
+:root[data-theme='nord'] .hljs-type,
+:root[data-theme='oled'] .hljs-type,
 :root[data-theme='dark'] .hljs-built_in,
-:root[data-theme='dark'] .hljs-class .hljs-title {
+:root[data-theme='charcoal'] .hljs-built_in,
+:root[data-theme='sepia-dark'] .hljs-built_in,
+:root[data-theme='nord'] .hljs-built_in,
+:root[data-theme='oled'] .hljs-built_in,
+:root[data-theme='dark'] .hljs-class .hljs-title,
+:root[data-theme='charcoal'] .hljs-class .hljs-title,
+:root[data-theme='sepia-dark'] .hljs-class .hljs-title,
+:root[data-theme='nord'] .hljs-class .hljs-title,
+:root[data-theme='oled'] .hljs-class .hljs-title {
   color: #2ac3de;
 }
 
 :root[data-theme='dark'] .hljs-tag,
+:root[data-theme='charcoal'] .hljs-tag,
+:root[data-theme='sepia-dark'] .hljs-tag,
+:root[data-theme='nord'] .hljs-tag,
+:root[data-theme='oled'] .hljs-tag,
 :root[data-theme='dark'] .hljs-name,
-:root[data-theme='dark'] .hljs-attribute {
+:root[data-theme='charcoal'] .hljs-name,
+:root[data-theme='sepia-dark'] .hljs-name,
+:root[data-theme='nord'] .hljs-name,
+:root[data-theme='oled'] .hljs-name,
+:root[data-theme='dark'] .hljs-attribute,
+:root[data-theme='charcoal'] .hljs-attribute,
+:root[data-theme='sepia-dark'] .hljs-attribute,
+:root[data-theme='nord'] .hljs-attribute,
+:root[data-theme='oled'] .hljs-attribute {
   color: #7dcfff;
 }
 
-:root[data-theme='dark'] .hljs-addition {
+:root[data-theme='dark'] .hljs-addition,
+:root[data-theme='charcoal'] .hljs-addition,
+:root[data-theme='sepia-dark'] .hljs-addition,
+:root[data-theme='nord'] .hljs-addition,
+:root[data-theme='oled'] .hljs-addition {
   color: #73daca;
   background: rgba(115, 218, 202, 0.12);
 }
 
-:root[data-theme='dark'] .hljs-deletion {
+:root[data-theme='dark'] .hljs-deletion,
+:root[data-theme='charcoal'] .hljs-deletion,
+:root[data-theme='sepia-dark'] .hljs-deletion,
+:root[data-theme='nord'] .hljs-deletion,
+:root[data-theme='oled'] .hljs-deletion {
   color: #f7768e;
   background: rgba(247, 118, 142, 0.12);
 }

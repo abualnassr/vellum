@@ -82,7 +82,7 @@
 .vellum-prose h4,
 .vellum-prose h5,
 .vellum-prose h6 {
-  color: var(--text-primary);
+  color: var(--text-heading, var(--text-primary));
   font-weight: 650;
   line-height: 1.26;
   letter-spacing: -0.02em;
@@ -159,15 +159,15 @@
 .vellum-prose a {
   color: var(--accent-text);
   text-decoration: underline;
-  text-decoration-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  text-decoration-color: color-mix(in srgb, var(--accent-border, var(--accent)) 45%, transparent);
   text-underline-offset: 3px;
   text-decoration-thickness: 1.5px;
   transition: text-decoration-color var(--transition-fast), color var(--transition-fast);
 }
 
 .vellum-prose a:hover {
-  color: var(--accent-hover);
-  text-decoration-color: var(--accent);
+  color: var(--accent-text);
+  text-decoration-color: var(--accent-border, var(--accent));
 }
 
 .vellum-prose strong {
@@ -307,7 +307,7 @@
   margin: 1.25em 0;
   padding-block: 0.3em;
   padding-inline: 1.15em 0;
-  border-inline-start: 3px solid var(--accent);
+  border-inline-start: 3px solid var(--accent-border, var(--accent));
   color: var(--text-secondary);
 }
 
@@ -432,12 +432,12 @@
 }
 
 .vellum-prose input.task-list-item-checkbox:hover {
-  border-color: var(--accent);
+  border-color: var(--accent-border, var(--accent));
 }
 
 .vellum-prose input.task-list-item-checkbox:checked {
   background: var(--accent);
-  border-color: var(--accent);
+  border-color: var(--accent-border, var(--accent));
 }
 
 .vellum-prose input.task-list-item-checkbox:checked::after {
@@ -447,7 +447,7 @@
   top: 1.5px;
   width: 4px;
   height: 8px;
-  border: solid #ffffff;
+  border: solid var(--accent-on-solid, #ffffff);
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
 }
@@ -583,7 +583,12 @@ mark.vellum-find-match.active {
   :root,
   :root[data-theme='dark'],
   :root[data-theme='paper'],
-  :root[data-theme='light'] {
+  :root[data-theme='light'],
+  :root[data-theme='snow'],
+  :root[data-theme='charcoal'],
+  :root[data-theme='sepia-dark'],
+  :root[data-theme='nord'],
+  :root[data-theme='oled'] {
     --bg-app: #ffffff;
     --bg-chrome: #f6f6f4;
     --bg-elevated: #ffffff;

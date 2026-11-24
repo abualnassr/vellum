@@ -91,10 +91,10 @@ interface ActivePopover {
 }
 
 const editorialMarkdownStyle = HighlightStyle.define([
-  { tag: tags.heading1, fontSize: '1.38em', fontWeight: '700', color: 'var(--text-primary)' },
-  { tag: tags.heading2, fontSize: '1.22em', fontWeight: '650', color: 'var(--text-primary)' },
-  { tag: tags.heading3, fontSize: '1.1em', fontWeight: '650', color: 'var(--text-primary)' },
-  { tag: [tags.heading4, tags.heading5, tags.heading6], fontWeight: '600', color: 'var(--text-primary)' },
+  { tag: tags.heading1, fontSize: '1.38em', fontWeight: '700', color: 'var(--text-heading, var(--text-primary))' },
+  { tag: tags.heading2, fontSize: '1.22em', fontWeight: '650', color: 'var(--text-heading, var(--text-primary))' },
+  { tag: tags.heading3, fontSize: '1.1em', fontWeight: '650', color: 'var(--text-heading, var(--text-primary))' },
+  { tag: [tags.heading4, tags.heading5, tags.heading6], fontWeight: '600', color: 'var(--text-heading, var(--text-primary))' },
   { tag: tags.strong, fontWeight: '700' },
   { tag: tags.emphasis, fontStyle: 'italic' },
   { tag: tags.strikethrough, textDecoration: 'line-through', color: 'var(--text-muted)' },

@@ -11,7 +11,7 @@ tags: [markdown, editorial, showcase]
 **Vellum** is crafted to feel like fine stationery paired with a precision drafting tool. Open any \`.md\` file to read comfortably right away, or switch seamlessly into **Split** (\`Ctrl+2\`) or **Source** (\`Ctrl+3\`) mode to write with zero friction.
 
 > [!TIP]
-> Press \`Ctrl+K\` at any time to launch the **Command Palette** — switch between **Ivory Light**, **Obsidian Night**, and **Warm Paper**, toggle typography, export to PDF, or jump across headings.
+> Press \`Ctrl+K\` at any time to launch the **Command Palette** — switch across 8 curated themes (**Ivory Light**, **Obsidian Night**, **Warm Paper**, **Snow**, **Charcoal**, **Sepia Dark**, **Nord**, **OLED**) or **System** sync, customize your **Accent Color** in Settings, toggle typography, export to PDF, or jump across headings.
 
 ---
 
@@ -20,7 +20,7 @@ tags: [markdown, editorial, showcase]
 Vellum supports full GitHub Flavored Markdown out of the box, including crisp tables, footnotes[^1], smart punctuation, and interactive task lists you can click directly in Reading mode:
 
 - [x] Instant single-file Windows startup with native WebView2 rendering
-- [x] Three curated palettes: **Ivory Light**, **Obsidian Night**, and **Warm Paper**
+- [x] 8 curated themes (**Ivory**, **Obsidian**, **Paper**, **Snow**, **Charcoal**, **Sepia Dark**, **Nord**, **OLED**) + custom **Accent Colors**
 - [x] Synchronized scroll between Source editor and Reading preview
 - [ ] Set Vellum as your default \`.md\` viewer in **Settings (\`Ctrl+,\`)**
 
