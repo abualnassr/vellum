@@ -1,10 +1,10 @@
+![Vellum — Editorial Markdown Viewer & Editor for Windows](docs/screenshots/vellum-hero.jpg)
+
 # Vellum
 
 > A fast, lightweight, editorial-grade Markdown viewer and editor for Windows.
 
 Vellum opens instantaneously in a refined reading view and lets you switch effortlessly between **Read**, **Split**, and **Source** modes. Built with **.NET 8 (WPF) + Edge WebView2 + TypeScript**, it avoids bundling Chromium, resulting in a tiny single-file executable (~8.4 MB) with native Windows integration.
-
-![Vellum — Synced Split View with KaTeX, Mermaid, and Arabic RTL](docs/screenshots/vellum-nord-split-rtl.png)
 
 ---
 
@@ -22,6 +22,9 @@ Vellum opens instantaneously in a refined reading view and lets you switch effor
 ---
 
 ## Screenshots
+
+### Synced Split View — KaTeX, Mermaid & Arabic RTL (Nord Theme)
+![Vellum — Synced Split View with KaTeX, Mermaid, and Arabic RTL](docs/screenshots/vellum-nord-split-rtl.png)
 
 ### OLED + Gold Accent (`#FFD400`) Reading View
 ![Vellum — OLED Theme with Gold Accent](docs/screenshots/vellum-oled-gold.png)
