@@ -50,6 +50,7 @@ interface TitleBarProps {
   onCycleTheme: () => void;
   onOpenPalette: () => void;
   onOpenSettings: () => void;
+  onOpenAbout: () => void;
   onDragWindow: () => void;
   onMinimize: () => void;
   onToggleMaximize: () => void;
@@ -83,6 +84,7 @@ export function TitleBar({
   onCycleTheme,
   onOpenPalette,
   onOpenSettings,
+  onOpenAbout,
   onDragWindow,
   onMinimize,
   onToggleMaximize,
@@ -265,6 +267,17 @@ export function TitleBar({
               >
                 <span>Print…</span>
                 <span className="titlebar-menu-kbd">Ctrl+P</span>
+              </button>
+
+              <div className="titlebar-menu-sep" />
+
+              <button
+                type="button"
+                role="menuitem"
+                className="titlebar-menu-item"
+                onClick={() => runMenuAction(onOpenAbout)}
+              >
+                <span>About Vellum</span>
               </button>
             </div>
           )}

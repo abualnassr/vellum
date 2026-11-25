@@ -10,6 +10,7 @@ import type { AssocStatus } from '../bridge/types';
 interface WelcomeViewProps {
   recentFiles: string[];
   assocStatus: AssocStatus | null;
+  appVersion: string;
   onNewDocument: () => void;
   onOpenFileDialog: () => void;
   onOpenFolderDialog: () => void;
@@ -17,11 +18,14 @@ interface WelcomeViewProps {
   onOpenRecent: (path: string) => void;
   onRegisterAssoc: () => void;
   onOpenDefaultApps: () => void;
+  onOpenAbout: () => void;
+  onOpenExternalUrl: (url: string) => void;
 }
 
 export function WelcomeView({
   recentFiles,
   assocStatus,
+  appVersion,
   onNewDocument,
   onOpenFileDialog,
   onOpenFolderDialog,
@@ -29,6 +33,8 @@ export function WelcomeView({
   onOpenRecent,
   onRegisterAssoc,
   onOpenDefaultApps,
+  onOpenAbout,
+  onOpenExternalUrl,
 }: WelcomeViewProps) {
   return (
     <div className="welcome-screen">
@@ -133,6 +139,27 @@ export function WelcomeView({
             </div>
           </div>
         )}
+
+        <footer className="welcome-footer">
+          <span>Vellum v{appVersion} &middot; Designed by Bandar Abualnassr</span>
+          <div className="welcome-footer-links">
+            <button
+              type="button"
+              className="welcome-footer-link"
+              onClick={() => onOpenExternalUrl('https://github.com/abualnassr/vellum')}
+            >
+              GitHub
+            </button>
+            <span aria-hidden="true">&middot;</span>
+            <button
+              type="button"
+              className="welcome-footer-link"
+              onClick={onOpenAbout}
+            >
+              About
+            </button>
+          </div>
+        </footer>
       </div>
     </div>
   );

@@ -244,7 +244,7 @@ async function handleMockRpc(method: string, params?: Record<string, unknown>): 
         initialFiles,
         activeSessionPath: initialFiles[0]?.path ?? null,
         isMaximized: false,
-        version: '1.0.0',
+        version: '1.0.1',
       };
     }
     case 'app:setDirtyState':
@@ -253,7 +253,13 @@ async function handleMockRpc(method: string, params?: Record<string, unknown>): 
     case 'window:close':
     case 'window:drag':
     case 'file:revealInExplorer':
-    case 'file:openExternalUrl':
+    case 'file:openExternalUrl': {
+      const url = String(params?.url ?? '');
+      if (/^https?:\/\//i.test(url)) {
+        window.open(url, '_blank', 'noopener,noreferrer');
+      }
+      return true;
+    }
     case 'assoc:openDefaultApps':
       return true;
     case 'spell:getLanguages':

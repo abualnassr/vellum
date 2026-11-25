@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Check, CheckCircle2, ExternalLink, X } from 'lucide-react';
+import { Check, CheckCircle2, ExternalLink, Github, Tag, Bug, X } from 'lucide-react';
 import type {
   AppSettings,
   AssocStatus,
@@ -17,14 +17,23 @@ import {
   THEME_OPTIONS,
 } from '../utils/themeAccent';
 
+export type SettingsTab = 'general' | 'appearance' | 'editor' | 'windows' | 'about';
+
+const GITHUB_URL = 'https://github.com/abualnassr/vellum';
+const RELEASES_URL = 'https://github.com/abualnassr/vellum/releases';
+const ISSUES_URL = 'https://github.com/abualnassr/vellum/issues';
+
 interface SettingsModalProps {
   settings: AppSettings;
   assocStatus: AssocStatus | null;
   spellLanguages: SpellLanguagesInfo | null;
+  appVersion: string;
+  initialTab?: SettingsTab;
   onUpdateSettings: (patch: Partial<AppSettings>) => void;
   onRegisterAssoc: () => void;
   onUnregisterAssoc: () => void;
   onOpenDefaultApps: () => void;
+  onOpenExternalUrl: (url: string) => void;
   onClose: () => void;
 }
 
@@ -32,18 +41,25 @@ export function SettingsModal({
   settings,
   assocStatus,
   spellLanguages,
+  appVersion,
+  initialTab = 'general',
   onUpdateSettings,
   onRegisterAssoc,
   onUnregisterAssoc,
   onOpenDefaultApps,
+  onOpenExternalUrl,
   onClose,
 }: SettingsModalProps) {
-  const [tab, setTab] = useState<'general' | 'appearance' | 'editor' | 'windows'>('general');
+  const [tab, setTab] = useState<SettingsTab>(initialTab);
   const [hexInput, setHexInput] = useState<string>(() =>
     settings.accentColor === 'default' || !settings.accentColor
       ? '#3B5BDB'
       : normalizeHexColor(settings.accentColor) ?? '#3B5BDB'
   );
+
+  useEffect(() => {
+    setTab(initialTab);
+  }, [initialTab]);
 
   useEffect(() => {
     setHexInput(
@@ -120,6 +136,13 @@ export function SettingsModal({
             onClick={() => setTab('windows')}
           >
             Windows Integration
+          </button>
+          <button
+            type="button"
+            className={`modal-tab ${tab === 'about' ? 'active' : ''}`}
+            onClick={() => setTab('about')}
+          >
+            About
           </button>
         </div>
 
@@ -549,6 +572,83 @@ export function SettingsModal({
                       Unregister
                     </button>
                   )}
+                </div>
+              </div>
+            </>
+          )}
+
+          {tab === 'about' && (
+            <>
+              <div className="about-hero">
+                <img src="/vellum.svg" alt="Vellum logo" className="about-logo" />
+                <div className="about-hero-text">
+                  <div className="about-title-row">
+                    <h3>Vellum</h3>
+                    <span className="status-badge registered">v{appVersion}</span>
+                  </div>
+                  <p>
+                    Fast, lightweight, editorial-grade Markdown viewer &amp; editor for Windows.
+                  </p>
+                </div>
+              </div>
+
+              <div className="setting-row">
+                <div>
+                  <div className="setting-title">Designed &amp; Built By</div>
+                  <div className="setting-desc">Creator &amp; maintainer of Vellum</div>
+                </div>
+                <div className="about-author-name">Bandar Abualnassr</div>
+              </div>
+
+              <div className="setting-row stacked">
+                <div>
+                  <div className="setting-title">GitHub Repository</div>
+                  <div className="setting-desc">
+                    Source code, releases, documentation, and issue tracker.
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  className="setting-path-box about-url-box"
+                  onClick={() => onOpenExternalUrl(GITHUB_URL)}
+                  title="Open Vellum on GitHub"
+                >
+                  <span>{GITHUB_URL}</span>
+                  <ExternalLink size={13} />
+                </button>
+
+                <div className="setting-actions">
+                  <button
+                    type="button"
+                    className="btn-primary"
+                    onClick={() => onOpenExternalUrl(GITHUB_URL)}
+                  >
+                    <Github size={14} /> View on GitHub
+                  </button>
+                  <button
+                    type="button"
+                    className="btn-secondary"
+                    onClick={() => onOpenExternalUrl(RELEASES_URL)}
+                  >
+                    <Tag size={13} /> Releases
+                  </button>
+                  <button
+                    type="button"
+                    className="btn-secondary"
+                    onClick={() => onOpenExternalUrl(ISSUES_URL)}
+                  >
+                    <Bug size={13} /> Report Issue
+                  </button>
+                </div>
+              </div>
+
+              <div className="setting-row">
+                <div>
+                  <div className="setting-title">License &amp; Stack</div>
+                  <div className="setting-desc">
+                    MIT License &middot; .NET 8 (WPF) &middot; Edge WebView2 &middot; React &middot; CodeMirror 6
+                  </div>
                 </div>
               </div>
             </>

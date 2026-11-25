@@ -920,6 +920,42 @@ body,
   font-size: 12.5px;
 }
 
+.welcome-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 20px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-subtle);
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+
+.welcome-footer-links {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  flex-shrink: 0;
+}
+
+.welcome-footer-link {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  font-weight: 550;
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+
+.welcome-footer-link:hover {
+  color: var(--accent-text);
+  text-decoration: underline;
+}
+
 /* Floating Find Bar */
 .find-bar {
   position: absolute;
@@ -1251,6 +1287,70 @@ body,
 
 .setting-actions .btn-danger {
   margin-inline-start: auto;
+}
+
+/* About Tab */
+.about-hero {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  background: var(--bg-chrome);
+  border: 1px solid var(--border-subtle);
+}
+
+.about-logo {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+}
+
+.about-hero-text {
+  min-width: 0;
+}
+
+.about-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.about-title-row h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.about-hero-text p {
+  margin: 4px 0 0;
+  font-size: 12.5px;
+  color: var(--text-secondary);
+}
+
+.about-author-name {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.about-url-box {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.about-url-box:hover {
+  border-color: var(--accent-border, var(--accent));
+  color: var(--accent-text);
 }
 
 .setting-row:last-child {

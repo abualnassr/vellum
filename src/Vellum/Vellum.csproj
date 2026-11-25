@@ -8,10 +8,13 @@
     <UseWPF>true</UseWPF>
     <AssemblyName>Vellum</AssemblyName>
     <RootNamespace>Vellum</RootNamespace>
-    <Version>1.0.0</Version>
-    <Authors>Vellum Contributors</Authors>
+    <Version>1.0.1</Version>
+    <Authors>Bandar Abualnassr</Authors>
+    <Company>Bandar Abualnassr</Company>
+    <Copyright>Copyright (c) 2026 Bandar Abualnassr</Copyright>
     <Product>Vellum</Product>
     <Description>Editorial Markdown Viewer and Editor for Windows</Description>
+    <PackageProjectUrl>https://github.com/abualnassr/vellum</PackageProjectUrl>
     <ApplicationIcon>Assets\vellum.ico</ApplicationIcon>
     <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
     <EnableCompressionInSingleFile Condition="'$(SelfContained)'=='true'">true</EnableCompressionInSingleFile>

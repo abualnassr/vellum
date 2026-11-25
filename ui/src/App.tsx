@@ -33,7 +33,7 @@ import { MarkdownEditor, type EditorHandle } from './components/MarkdownEditor';
 import { SplitView } from './components/SplitView';
 import { FindBar } from './components/FindBar';
 import { CommandPalette, type PaletteCommand } from './components/CommandPalette';
-import { SettingsModal } from './components/SettingsModal';
+import { SettingsModal, type SettingsTab } from './components/SettingsModal';
 import { StatusBar } from './components/StatusBar';
 import { UnsavedModal } from './components/UnsavedModal';
 import { ImageLightbox } from './components/ImageLightbox';
@@ -84,6 +84,8 @@ export default function App() {
 
   const [paletteOpen, setPaletteOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [settingsTab, setSettingsTab] = useState<SettingsTab>('general');
+  const [appVersion, setAppVersion] = useState('1.0.1');
   const [findOpen, setFindOpen] = useState(false);
   const [findReplaceOpen, setFindReplaceOpen] = useState(false);
   const [findQuery, setFindQuery] = useState('');
@@ -210,8 +212,10 @@ export default function App() {
           initialFiles: FileDocument[];
           activeSessionPath?: string | null;
           isMaximized: boolean;
+          version?: string;
         }>('app:ready');
         if (!mounted) return;
+        if (boot.version) setAppVersion(boot.version);
         const mergedSettings = { ...DEFAULT_SETTINGS, ...boot.settings };
         setSettings(mergedSettings);
         setIsMaximized(Boolean(boot.isMaximized));
@@ -843,6 +847,15 @@ export default function App() {
     void invokeBridge('assoc:openDefaultApps').catch(() => {});
   }, []);
 
+  const openExternalUrl = useCallback((url: string) => {
+    void invokeBridge('file:openExternalUrl', { url }).catch(() => {});
+  }, []);
+
+  const openSettingsModal = useCallback((initialTab: SettingsTab = 'general') => {
+    setSettingsTab(initialTab);
+    setSettingsOpen(true);
+  }, []);
+
   const jumpToHeading = useCallback(
     (item: TocItem) => {
       setActiveHeadingId(item.id);
@@ -950,7 +963,11 @@ export default function App() {
         setSidebarOpen((v) => !v);
       } else if (key === ',') {
         e.preventDefault();
-        setSettingsOpen((v) => !v);
+        if (settingsOpen) {
+          setSettingsOpen(false);
+        } else {
+          openSettingsModal('general');
+        }
       } else if (key === 'e' && activeTab) {
         e.preventDefault();
         void exportPdf();
@@ -994,6 +1011,7 @@ export default function App() {
     setActiveViewMode,
     exportPdf,
     updateSettings,
+    openSettingsModal,
   ]);
 
   // Command Palette Registry
@@ -1209,7 +1227,13 @@ export default function App() {
         category: 'App',
         label: 'Open Settings & Windows Integration',
         shortcut: 'Ctrl+,',
-        run: () => setSettingsOpen(true),
+        run: () => openSettingsModal('general'),
+      },
+      {
+        id: 'app:about',
+        category: 'Help',
+        label: 'About Vellum & GitHub Repository',
+        run: () => openSettingsModal('about'),
       }
     );
 
@@ -1227,6 +1251,7 @@ export default function App() {
     exportPdf,
     exportHtml,
     updateSettings,
+    openSettingsModal,
   ]);
 
   const handleUnsavedSave = async () => {
@@ -1310,7 +1335,8 @@ export default function App() {
         onToggleOutline={() => setOutlineOpen((v) => !v)}
         onCycleTheme={cycleTheme}
         onOpenPalette={() => setPaletteOpen(true)}
-        onOpenSettings={() => setSettingsOpen(true)}
+        onOpenSettings={() => openSettingsModal('general')}
+        onOpenAbout={() => openSettingsModal('about')}
         onDragWindow={() => void invokeBridge('window:drag').catch(() => {})}
         onMinimize={() => void invokeBridge('window:minimize').catch(() => {})}
         onToggleMaximize={() =>
@@ -1372,6 +1398,7 @@ export default function App() {
             <WelcomeView
               recentFiles={settings.recentFiles}
               assocStatus={assocStatus}
+              appVersion={appVersion}
               onNewDocument={createNewTab}
               onOpenFileDialog={() => void openFileDialog()}
               onOpenFolderDialog={() => void openFolderDialog()}
@@ -1379,6 +1406,8 @@ export default function App() {
               onOpenRecent={(p) => void openFileByPath(p)}
               onRegisterAssoc={() => void registerAssoc()}
               onOpenDefaultApps={openDefaultApps}
+              onOpenAbout={() => openSettingsModal('about')}
+              onOpenExternalUrl={openExternalUrl}
             />
           ) : (
             <>
@@ -1559,10 +1588,13 @@ export default function App() {
           settings={settings}
           assocStatus={assocStatus}
           spellLanguages={spellLanguages}
+          appVersion={appVersion}
+          initialTab={settingsTab}
           onUpdateSettings={updateSettings}
           onRegisterAssoc={() => void registerAssoc()}
           onUnregisterAssoc={() => void unregisterAssoc()}
           onOpenDefaultApps={openDefaultApps}
+          onOpenExternalUrl={openExternalUrl}
           onClose={() => setSettingsOpen(false)}
         />
       )}

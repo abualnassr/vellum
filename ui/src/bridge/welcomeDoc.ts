@@ -1,8 +1,8 @@
 export const SHOWCASE_MARKDOWN = `---
 title: Welcome to Vellum
 subtitle: Editorial Markdown Viewer & Editor for Windows
-author: Vellum Studio
-version: 1.0
+author: Bandar Abualnassr
+version: 1.0.1
 tags: [markdown, editorial, showcase]
 ---
 
